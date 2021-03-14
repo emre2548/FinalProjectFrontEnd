@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
-import { ProductResponseModel } from 'src/app/models/productResponseModel';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -34,15 +33,15 @@ export class ProductComponent implements OnInit {
     // .subscribe((response) => {
     //   this.products = response.data
     // });
-    console.log("Api request başladı");
+    // console.log("Api request başladı");
     // observeble söndürüyr bu responseble olabilirsinndemek
     // burası asenkron çalılışıyor konsolda  request başladı motod bitti ve en son request bitti geldi asenkron çalışıyor
     this.productService.getProducts().subscribe(Response => {
-      this.products = Response.data
-      console.log("Api request bitti");
+      this.products = Response.data;
+      // console.log("Api request bitti");
       this.dataLoaded = true;
     })
-    console.log("Metod bitti");
+    // console.log("Metod bitti");
   }
 
 }
