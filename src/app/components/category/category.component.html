@@ -1,3 +1,7 @@
 <ul class="list-group">
-    <li *ngFor="let category of categories" class="list-group-item">{{category.categoryName}}</li>
+    <li (click)="setCurrentCategory(category)" *ngFor="let category of categories" [class]="getCurrentCategoryClass(category)">{{category.categoryName}}</li>
   </ul>
+
+  <!-- alt satırı ekledik tılayınca kategory adını yazıyor ancak ilk başta liste boş geliyor bunun için *ngIf ekledik 
+  kategoriler düzgün gelsin diye currentCategory anlamlı ise listeyi getiriyor -->
+  <h5 *ngIf="currentCategory">{{currentCategory.categoryName}} seçtiniz</h5>
