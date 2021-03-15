@@ -9,7 +9,8 @@ import { Product } from '../models/product';
 })
 export class ProductService {
 
-  apiUrl = "https://localhost:44392/api/Products/getall";
+  // apiUrl = "https://localhost:44392/api/Products/getall";
+  apiUrl = "https://localhost:44392/api/";
   
   // HttpClient enjekte ediyoruz kullanabilmek için
   constructor(private httpClient:HttpClient) { }
@@ -17,7 +18,15 @@ export class ProductService {
   // API Bağlanıyoruz
   //Observable döndürecek
   getProducts():Observable<ListResponseModel<Product>>{
+    //apiUrl sonuna eklenecek adres let değişken oluşturur
+    let newPath = this.apiUrl + "products/getall"
     // gelen data ProductResponseModel modeline map et demek
-    return this.httpClient.get<ListResponseModel<Product>>(this.apiUrl);
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
+  }
+
+  getProductsByCategory(categoryId:number):Observable<ListResponseModel<Product>>{
+    let newPath = this.apiUrl + "products/getbycategory?categoryId=" + categoryId
+    // gelen data ProductResponseModel modeline map et demek
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }
 }
