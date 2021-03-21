@@ -41,17 +41,23 @@ export class ProductAddComponent implements OnInit {
       /** add fonksiyonu observable onject bunun çalışması için subscribe yazıyoruz bunun bilgisi api den geliyor */
       this.productService.add(productModel).subscribe(response=>{
         // asenkron çalıştığı için bu kodlar kodu buraya alıyoruz ilgili datadan gelen herhangi bir sonucu buraya ekleyeibliriz
-        console.log(response)
+        // console.log(response)
         // this.toastrService.success("Ürün eklendi", "Başarılı")
         // core dan gelen mesajı yazdırıyoruz
         this.toastrService.success(response.message, "Başarılı")
       },responseError=>{
-        console.log(responseError)
-        this.toastrService.error(responseError.error)
+        // console.log(responseError)
+        if (responseError.error.Errors.length>0) {
+          // console.log(responseError.error.Errors)
+          // validation error backend kısmında biz yazdık 
+          for (let i = 0; i < responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Doğrulama hatası")      
+          }
+        }
       })
     }else{
       // yukaroya private olarak servisleri ekledik 
-      this.toastrService.error("Formunuz Eksik","Dikkat")
+      this.toastrService.error("Formunuz eksik","Dikkat")
     }
       // console.log(productModel)
   }
